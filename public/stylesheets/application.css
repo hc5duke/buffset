@@ -13,12 +13,24 @@ body {
   color: white;
 }
 #body {
-  width: 878px;
+  width: 880px;
   height: 679px;
   margin: 0px auto;
   background-image: url(/images/buffset.jpg);
   background-repeat: no-repeat;
 }
+#users {
+  padding: 130px 80px 0px;
+}
+#signin {
+  margin-top: 280px;
+  text-align: center;
+}
+.user {
+  width: 240px;
+  float: left;
+}
+
 .clear {
   clear: both;
 }
