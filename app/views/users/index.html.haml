@@ -1,0 +1,5 @@
+%section#users
+- @users.each do |user|
+  .user
+    .email= user.email
+    .count= user.pushup_set_count.tallyize

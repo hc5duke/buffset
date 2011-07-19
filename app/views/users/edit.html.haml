@@ -1,0 +1,10 @@
+%section#user
+  = form_for @user do |f|
+    %h3 Edit user
+    %section#user-email
+    = f.label :email
+    = f.email_field :email, :disabled => 'disabled'
+    %section#user-pushup-set-count
+    = f.label :pushup_set_count, "Count"
+    = f.text_field :pushup_set_count
+    = f.submit
