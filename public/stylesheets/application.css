@@ -5,6 +5,9 @@ body {
 a {
   color: #0c7579
 }
+input {
+  font-size: 0.5em;
+}
 #nav_user {
   float: right;
   color: black;
@@ -25,8 +28,8 @@ a {
   background-repeat: no-repeat;
 }
 .text {
-  padding: 130px 80px 0px;
-  font-family: 'Love Ya Like A Sister', cursive, arial;
+  padding: 130px 100px 0px;
+  font-family: 'Walter Turncoat', cursive, arial;
   font-size: 2em;
 }
 #signin {
@@ -47,4 +50,7 @@ a {
 
 .clear {
   clear: both;
+}
+.hidden {
+  display: none;
 }
