@@ -1,0 +1,2 @@
+class PushupHistoriesController < ApplicationController
+end
