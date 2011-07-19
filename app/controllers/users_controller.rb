@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
   def index
-    @users = User.all
+    @users = User.active
   end
 
   def show
@@ -9,7 +9,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    if current_user.admin?
+      @user = User.find_by_id(params[:id])
+    else
+      @user = current_user
+    end
   end
 
   def update
