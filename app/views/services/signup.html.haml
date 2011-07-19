@@ -1,23 +1,22 @@
-%section#services_new.services
+%section#services_new.services.text
   %h1 New account
 
-  #body
-    %h3 This authentication is new to Buffset
+  %h3 This authentication is new to Buffset
 
-    %p.small
-      Provider:
-      = @authhash[:provider]
-      %br/
-      ID:
-      = @authhash[:uid]
-      %br/
-      Name:
-      = @authhash[:name]
-      %br/
-      Email:
-      = @authhash[:email]
-      %br/
+  %p.small
+    Provider:
+    = @authhash[:provider]
+    %br/
+    ID:
+    = @authhash[:uid]
+    %br/
+    Name:
+    = @authhash[:name]
+    %br/
+    Email:
+    = @authhash[:email]
+    %br/
 
-    = form_tag :controller => "services", :action => "newaccount" do
-      = submit_tag "Confirm and create new account"
-      = submit_tag "Cancel"
+  = form_tag :controller => "services", :action => "newaccount" do
+    = submit_tag "Confirm and create new account"
+    = submit_tag "Cancel"
