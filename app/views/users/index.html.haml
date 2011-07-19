@@ -3,7 +3,7 @@
     .user{ :id => user == current_user ? 'current_user' : ''}
       .handle= user.handle
       - if current_user.admin?
-        = link_to 'edit', edit_user_path(user)user
+        = link_to 'edit', edit_user_path(user)
       - if user == current_user
         .count#edit_current_user= link_to(user.pushup_set_count.to_i.tallyize, '#')
         .hidden#edit_current_user_form
