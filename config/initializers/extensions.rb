@@ -4,9 +4,13 @@ class Fixnum
   # 8 =>  ///
   # starting with 10, use Roman
   def tallyize
-    ones = self % 5
-    fives = self - ones
-    "#{fives.romanize} #{'/' * ones}"
+    if self > 0
+      ones = self % 5
+      fives = self - ones
+      "#{fives.romanize} #{'/' * ones}"
+    else
+      "0"
+    end
   end
 
   def romanize
