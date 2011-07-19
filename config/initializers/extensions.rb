@@ -1,14 +1,15 @@
 class Fixnum
-  # 1 => /
-  # 4 => ////
-  # 8 =>  ///
   # starting with 10, use Roman
-  def tallyize
+  def tallyize(use_v_for_5=false)
     if self > 0
       ones = self % 10
       str = [ (self - ones).romanize ]
       if ones >= 5
-        str << "/" << "\314\266/" * 3
+        if use_v_for_5
+          str << 'V'
+        else
+          str << "\314\266/" * 4
+        end
         str << ' '
         ones -= 5
       end
