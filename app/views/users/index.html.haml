@@ -1,12 +1,12 @@
 %section#users.text
   - @users.each do |user|
-    .user
+    .user{ :id => user == current_user ? 'current_user' : ''}
       .handle= user.handle
       - if user == current_user
         .count#edit_current_user= link_to(user.pushup_set_count.tallyize, '#')
         .hidden#edit_current_user_form
           = form_for user do |f|
-            = f.number_field :pushup_set_count, :min => 0, :max => 9999, :size => 4
+            = f.number_field :pushup_set_count, :min => 0, :max => 9999, :size => 6
             = f.submit 'save'
             = button_to 'cancel', '#', :id => 'cancel_edit'
       - else

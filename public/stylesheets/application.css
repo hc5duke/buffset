@@ -42,10 +42,16 @@ input {
 }
 .user {
   padding: 5px 15px;
+  max-width: 200px;
   float: left;
 }
 .user .handle {
+  text-align: center;
   border-bottom: 3px solid #0c7579;
+}
+#current_user .handle {
+  color: #c00;
+  border-bottom: 3px solid #c00;
 }
 #edit_current_user a {
   text-decoration: none;
