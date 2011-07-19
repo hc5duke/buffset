@@ -1,9 +1,9 @@
 body {
   font-family: arial;
-  color: #0c7579
+  color: #0c7579;
 }
 a {
-  color: #0c7579
+  color: #0c7579;
 }
 input {
   font-size: 0.5em;
@@ -47,7 +47,9 @@ input {
 .user .handle {
   border-bottom: 3px solid #0c7579;
 }
-
+#edit_current_user a {
+  text-decoration: none;
+}
 .clear {
   clear: both;
 }
