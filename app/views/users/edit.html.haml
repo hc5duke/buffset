@@ -9,5 +9,5 @@
     = f.text_field :handle
     %section#user-pushup-set-count
     = f.label :pushup_set_count, "Count"
-    = f.text_field :pushup_set_count
+    = f.number_field :pushup_set_count, :min => 0, :max => 9999
     = f.submit

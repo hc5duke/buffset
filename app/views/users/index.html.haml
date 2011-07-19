@@ -2,4 +2,25 @@
   - @users.each do |user|
     .user
       .handle= user.handle
-      .count= user.pushup_set_count.tallyize
+      - if user == current_user
+        .count#edit_current_user= link_to(user.pushup_set_count.tallyize, '#')
+        .hidden#edit_current_user_form
+          = form_for user do |f|
+            = f.number_field :pushup_set_count, :min => 0, :max => 9999, :size => 4
+            = f.submit 'save'
+            = button_to 'cancel', '#', :id => 'cancel_edit'
+      - else
+        .count= user.pushup_set_count.tallyize
+
+- content_for :page_javascript do
+  :plain
+    $('#edit_current_user').click(function(){
+      $('#edit_current_user').hide();
+      $('#edit_current_user_form').show();
+      return false;
+    });
+    $('#cancel_edit').click(function(){
+      $('#edit_current_user').show();
+      $('#edit_current_user_form').hide();
+      return false;
+    });
