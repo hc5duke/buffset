@@ -8,17 +8,19 @@
     = csrf_meta_tag
   %body
     %section#body
-      %section#flash
-        - flash.each do |key, value|
-          .flash.round{:class => key}
-            = value
       %nav#nav_user
         %ul
           - if user_signed_in?
             %li= link_to current_user.email, edit_user_path(current_user)
             %li= link_to "Sign out", signout_services_path
+          - else
+            %li= link_to "Sign in", '/auth/google'
           %li &nbsp;
       .clear
+      %section#flash
+        - flash.each do |key, value|
+          .flash.round{:class => key}
+            = value
       = yield
     %script
       = yield :page_javascript
