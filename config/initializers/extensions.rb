@@ -5,9 +5,15 @@ class Fixnum
   # starting with 10, use Roman
   def tallyize
     if self > 0
-      ones = self % 5
-      fives = self - ones
-      "#{fives.romanize} #{'/' * ones}"
+      ones = self % 10
+      str = [ (self - ones).romanize ]
+      if ones >= 5
+        str << "/" << "\314\266/" * 3
+        str << ' '
+        ones -= 5
+      end
+      str << '/' * ones
+      str.join('')
     else
       "0"
     end
@@ -22,8 +28,6 @@ class Fixnum
     s, num = fives(num, 100, 'C', 'D', 'M')
     str << s
     s, num = fives(num, 10, 'X', 'L', 'C')
-    str << s
-    s, num = fives(num, 1, 'I', 'V', 'X')
     str << s
 
     str.join(' ')
