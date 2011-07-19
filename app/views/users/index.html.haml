@@ -2,15 +2,17 @@
   - @users.each do |user|
     .user{ :id => user == current_user ? 'current_user' : ''}
       .handle= user.handle
+      - if current_user.admin?
+        = link_to 'edit', edit_user_path(user)user
       - if user == current_user
-        .count#edit_current_user= link_to(user.pushup_set_count.tallyize, '#')
+        .count#edit_current_user= link_to(user.pushup_set_count.to_i.tallyize, '#')
         .hidden#edit_current_user_form
           = form_for user do |f|
             = f.number_field :pushup_set_count, :min => 0, :max => 9999, :size => 6
             = f.submit 'save'
             = button_to 'cancel', '#', :id => 'cancel_edit'
       - else
-        .count= user.pushup_set_count.tallyize
+        .count= user.pushup_set_count.to_i.tallyize
 
 - content_for :page_javascript do
   :plain
