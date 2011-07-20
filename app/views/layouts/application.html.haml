@@ -2,7 +2,8 @@
 %html
   %head
     %title Buffset
-    %link{:href => 'http://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
+    - if Rails.env == 'production'
+      %link{:href => 'http://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
     = stylesheet_link_tag :all
     = javascript_include_tag 'jquery'
     = csrf_meta_tag
