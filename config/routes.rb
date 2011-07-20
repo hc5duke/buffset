@@ -18,11 +18,6 @@ Buffset::Application.routes.draw do
 
   # used for the demo application only
 
-  resources :users, :only => [:index, :show, :edit, :update] do
-    collection do
-      get 'index'
-    end
-  end
-
+  resources :users, :only => [:index, :show, :edit, :update]
   root :to => "services#signin"
 end

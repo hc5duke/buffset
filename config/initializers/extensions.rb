@@ -3,7 +3,7 @@ class Fixnum
   def tallyize(use_v_for_5=false)
     if self > 0
       ones = self % 10
-      str = [ (self - ones).romanize ]
+      str = [ (self - ones).romanize, ' ' ]
       if ones >= 5
         if use_v_for_5
           str << 'V'
@@ -14,7 +14,7 @@ class Fixnum
         ones -= 5
       end
       str << '/' * ones
-      str.join('')
+      str.join('').strip
     else
       "0"
     end

@@ -1,8 +1,8 @@
 %section#users.text
   - @users.each do |user|
-    .user{ :id => user == current_user ? 'current_user' : ''}
+    .user{ :id => user == current_user ? 'current_user' : "user_#{user.id}"}
       .handle
-        - if current_user.admin?
+        - if current_user && current_user.admin?
           = link_to user.handle, edit_user_path(user)
         - else
           = user.handle
@@ -28,3 +28,46 @@
       $('#edit_current_user_form').hide();
       return false;
     });
+
+    var usersHash = #{@users_hash.to_json};
+    if (window.webkitNotifications) {
+      function createNotificationInstance(options) {
+        if (options.notificationType == 'simple') {
+          return window.webkitNotifications.createNotification(options.image, options.title, options.content);
+        } else if (options.notificationType == 'html') {
+          return window.webkitNotifications.createHTMLNotification(options.url);
+        }
+      }
+      var checkStatus = function(){
+        if (window.webkitNotifications.checkPermission() == 0) {
+          $.get('/.json', {}, function(response){
+            if (response.length != usersHash.length) {
+              location.reload(true);
+            }
+            for (var u in response) {
+              if (response[u].count != usersHash[u].count) {
+                usersHash[u] = response[u];
+                $('#user_' + u).find('.count').text(response[u].tally);
+                notify(response[u].name, response[u].count);
+              }
+            }
+            setTimeout(checkStatus, 5000);
+          });
+        } else {
+          window.webkitNotifications.requestPermission();
+        }
+      };
+      var notify = function(name, count){
+        var options = {
+          notificationType: 'simple',
+          image: '/images/icon.png',
+          title: 'Buffset Update!',
+          content: name + ' is now at ' + count,
+        };
+        var notification = createNotificationInstance(options);
+        notification.ondisplay = function() {};
+        notification.onclose = function() {};
+        notification.show();
+      };
+      setTimeout(checkStatus, 5000);
+    }

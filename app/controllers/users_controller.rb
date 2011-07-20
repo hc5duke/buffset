@@ -3,6 +3,21 @@ class UsersController < ApplicationController
   before_filter :find_user, :only => [:edit, :update]
   def index
     @users = User.active
+    @users_hash = {}
+    @users.each do |user|
+      unless user == current_user
+        @users_hash[user.id] = {
+          :name  => user.name,
+          :count => user.pushup_set_count,
+          :tally => user.pushup_set_count.to_i.tallyize
+        }
+      end
+    end
+
+    respond_to do |format|
+      format.json { render :json => @users_hash }
+      format.html
+    end
   end
 
   def show
