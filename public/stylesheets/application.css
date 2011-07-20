@@ -52,6 +52,9 @@ input {
   text-align: center;
   border-bottom: 3px solid #0c7579;
 }
+.user .handle a {
+  text-decoration: none;
+}
 #current_user .handle {
   color: #c00;
   border-bottom: 3px solid #c00;
