@@ -21,7 +21,7 @@ class Fixnum
   end
 
   def romanize
-    raise 'too big' if self > 9999
+    raise 'too strong' if self > 9999
     str = []
     num = self
     s, num = fives(num, 1000, 'M', "\342\206\201", "\342\206\202")
