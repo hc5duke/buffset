@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %title Buffset Admin
+    - if Rails.env == 'production'
+      %link{:href => 'http://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
+    = javascript_include_tag 'jquery'
+    = csrf_meta_tag
+  %body
+    %section#body
+      %nav#nav_user
+        %ul
+          - if user_signed_in?
+            - if current_user.admin?
+              %li
+                = User.active.count
+                active
+                \/
+                = User.count
+                total
+            %li= link_to current_user.email, edit_user_path(current_user)
+            %li= link_to "Sign out", signout_services_path
+          - else
+            %li= link_to "Sign in", '/auth/google'
+          %li &nbsp;
+      .clear
+      %section#flash
+        - flash.each do |key, value|
+          .flash.round{:class => key}
+            = value
+      = yield
+    %script
+      = yield :page_javascript

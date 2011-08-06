@@ -19,4 +19,11 @@ class ApplicationController < ActionController::Base
         redirect_to signin_services_path
       end
     end
+
+    def admin_only
+      unless @current_user.admin?
+        flash[:error] = 'You do not have access.'
+        redirect_to root_path
+      end
+    end
 end

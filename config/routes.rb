@@ -1,5 +1,4 @@
 Buffset::Application.routes.draw do
-  # Omniauth pure
   match "/signin" => "services#signin"
   match "/signout" => "services#signout"
 
@@ -16,8 +15,11 @@ Buffset::Application.routes.draw do
     end
   end
 
-  # used for the demo application only
-
   resources :users, :only => [:index, :show, :edit, :update]
+
+  namespace :admin do
+    resources :users, :only => [:index, :update]
+  end
+
   root :to => "services#signin"
 end

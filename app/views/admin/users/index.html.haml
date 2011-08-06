@@ -1,0 +1,7 @@
+%h1 Active
+- @active_users.each do |user|
+  = render :partial => 'user', :object => user
+
+%h1 Inactive
+- @inactive_users.each do |user|
+  = render :partial => 'user', :object => user

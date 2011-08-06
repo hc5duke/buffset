@@ -1,0 +1,6 @@
+- form_for [:admin, user] do |f|
+  = f.check_box :active
+  = f.text_field :name
+  = f.text_field :handle
+  = f.text_field :pushup_set_count, :type => 'number'
+  = f.submit
