@@ -29,10 +29,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(params[:user])
-      flash.now[:notice] = "Saved user!"
+      flash[:notice] = "Saved user!"
       redirect_to root_path and return
     else
-      flash[:error] = "Unable to save user"
+      flash.now[:error] = "Unable to save user"
       render :action => :edit and return
     end
   end
