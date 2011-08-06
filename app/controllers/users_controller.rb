@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
   before_filter :find_user, :only => [:edit, :update]
   def index
-    @users = User.active
+    @users = User.active.sort_by{|user| -user.pushup_set_count }
     @users_hash = {}
     @users.each do |user|
       unless user == current_user
