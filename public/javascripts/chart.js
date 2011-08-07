@@ -17,6 +17,7 @@ var createChart = function(series) {
     },
     xAxis: {
       type: 'datetime',
+      maxZoom: 24 * 3600000, // 1 day
       dateTimeLabelFormats: {
         day: '%m-%d',
         week: '%m-%d',
