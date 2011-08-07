@@ -1,3 +1,8 @@
+Highcharts.setOptions({
+  global: {
+    useUTC: false
+  }
+});
 var createChart = function(series) {
   var chart = new Highcharts.Chart({
     chart: {
