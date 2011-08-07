@@ -5,7 +5,7 @@
     - if Rails.env == 'production'
       %link{:href => 'http://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
     = stylesheet_link_tag :all
-    = javascript_include_tag 'jquery'
+    = javascript_include_tag 'jquery', 'highcharts/highcharts.src', 'chart'
     = csrf_meta_tag
   %body
     %section#body
@@ -29,6 +29,6 @@
         - flash.each do |key, value|
           .flash.round{:class => key}
             = value
-      = yield
+      .container= yield
     %script
       = yield :page_javascript

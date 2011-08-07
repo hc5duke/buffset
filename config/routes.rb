@@ -15,7 +15,11 @@ Buffset::Application.routes.draw do
     end
   end
 
-  resources :users, :only => [:index, :show, :edit, :update]
+  resources :users, :only => [:index, :show, :edit, :update] do
+    collection do
+      get 'chart'
+    end
+  end
 
   namespace :admin do
     resources :users, :only => [:index, :update]

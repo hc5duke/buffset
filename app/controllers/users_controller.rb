@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
-  before_filter :find_user, :only => [:edit, :update]
+  before_filter :find_user, :only => [:show, :edit, :update]
   def index
     @users = User.active.sort_by{|user| -user.pushup_set_count }
     @users_hash = {}
@@ -21,7 +21,21 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to edit_user_path
+    @series = [
+      {
+        :name => @user.handle,
+        :data => @user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count * 20]}
+      }
+    ]
+  end
+
+  def chart
+    @series = User.active.map do |user|
+      {
+        :name => user.handle,
+        :data => user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count * 20]}
+      }
+    end
   end
 
   def edit

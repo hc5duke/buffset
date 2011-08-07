@@ -1,0 +1,14 @@
+.text
+  #container{:style => "width: 100%; height: 400px; margin: 0 auto;"}
+%script
+  :plain
+    var series = #{@series.to_json};
+    for (var ser in series) {
+      var data = series[ser].data;
+      for (var arr in data) {
+        series[ser].data[arr][0] = Date.parse(data[arr][0]);
+      }
+    }
+    $(function(){
+      createChart(series);
+    });
