@@ -36,7 +36,11 @@ var createChart = function(series) {
     plotOptions: {
       series: {
         marker: {
-          enabled: false
+          symbol: 'circle',
+          fillColor: '#ffffff',
+          lineColor: null,
+          lineWidth: 2,
+          radius: 3,
         }
       }
     },
