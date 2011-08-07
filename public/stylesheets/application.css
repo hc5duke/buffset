@@ -11,15 +11,21 @@ input {
 .small {
   font-size: 14px;
 }
+#nav_pages {
+  float: left;
+  color: black;
+}
 #nav_user {
   float: right;
   color: black;
 }
+#nav_pages li,
 #nav_user li {
   display: inline;
   list-style-type: none;
   padding-right: 20px;
 }
+#nav_pages li a,
 #nav_user li a {
   color: white;
 }

@@ -9,6 +9,10 @@
     = csrf_meta_tag
   %body
     %section#body
+      %nav#nav_pages
+        %ul
+          %li= link_to 'Home', root_path
+          %li= link_to 'Chart', chart_users_path
       %nav#nav_user
         %ul
           - if user_signed_in?

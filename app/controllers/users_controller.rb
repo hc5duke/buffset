@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index]
+  before_filter :authenticate_user!, :except => [:index, :chart]
   before_filter :find_active, :only => [:index, :chart]
   before_filter :find_user, :only => [:show, :edit, :update]
 

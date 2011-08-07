@@ -5,7 +5,7 @@
         - if current_user && current_user.admin?
           = link_to user.handle, edit_user_path(user)
         - else
-          = user.handle
+          = link_to user.handle, user_path(user)
       - if user == current_user
         .count#edit_current_user= link_to(user.pushup_set_count.to_i.tallyize(is_mobile?), '#')
         .hidden#edit_current_user_form
