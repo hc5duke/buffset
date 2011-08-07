@@ -34,6 +34,13 @@ var createChart = function(series) {
         color: '#808080'
       }]
     },
+    plotOptions: {
+      series: {
+        marker: {
+          enabled: false
+        }
+      }
+    },
     tooltip: {
       formatter: function() {
         return '<b>'+ this.series.name +'</b><br/>'+
