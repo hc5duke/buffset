@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:index]
+  before_filter :find_active, :only => [:index, :chart]
   before_filter :find_user, :only => [:show, :edit, :update]
+
   def index
-    @users = User.active.sort_by{|user| -user.pushup_set_count }
     @users_hash = {}
     @users.each do |user|
       unless user == current_user
@@ -20,6 +21,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def chart
+    @series = @users.map do |user|
+      {
+        :name => user.handle,
+        :data => user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
+      }
+    end
+  end
+
   def show
     @series = [
       {
@@ -27,15 +37,6 @@ class UsersController < ApplicationController
         :data => @user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
       }
     ]
-  end
-
-  def chart
-    @series = User.active.map do |user|
-      {
-        :name => user.handle,
-        :data => user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
-      }
-    end
   end
 
   def edit
@@ -52,6 +53,10 @@ class UsersController < ApplicationController
   end
 
 private
+  def find_active
+    @users = User.active.sort_by{|user| -user.pushup_set_count }
+  end
+
   def find_user
     if current_user.admin?
       @user = User.find(params[:id])
