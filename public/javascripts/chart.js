@@ -3,6 +3,7 @@ var createChart = function(series) {
     chart: {
       renderTo: 'container',
       defaultSeriesType: 'line',
+      zoomType: 'x',
       marginRight: 130,
       marginBottom: 25
     },
@@ -27,6 +28,7 @@ var createChart = function(series) {
       title: {
         text: 'Total Pushups'
       },
+      min: 0,
       plotLines: [{
         value: 0,
         width: 1,
