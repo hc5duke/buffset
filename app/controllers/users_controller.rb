@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     @series = [
       {
         :name => @user.handle,
-        :data => @user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count * 20]}
+        :data => @user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
       }
     ]
   end
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @series = User.active.map do |user|
       {
         :name => user.handle,
-        :data => user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count * 20]}
+        :data => user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
       }
     end
   end
