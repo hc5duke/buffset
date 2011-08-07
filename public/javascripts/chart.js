@@ -3,7 +3,6 @@ var createChart = function(series) {
     chart: {
       renderTo: 'container',
       defaultSeriesType: 'line',
-      type: 'spline',
       marginRight: 130,
       marginBottom: 25
     },
