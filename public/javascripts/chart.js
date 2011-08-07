@@ -55,7 +55,7 @@ var createChart = function(series) {
     tooltip: {
       formatter: function() {
         return '<b>'+ this.series.name +'</b><br/>'+
-          Highcharts.dateFormat('%m-%d', this.x) +': '+ this.y +' pushups';
+          Highcharts.dateFormat('%m-%d %H:%M', this.x) +': '+ this.y +' pushups (' + this.y/20 +' sets)';
       }
     },
     legend: {
