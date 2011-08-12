@@ -3,7 +3,7 @@
   %head
     %title Buffset
     - if Rails.env == 'production'
-      %link{:href => 'http://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
+      %link{:href => 'https://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
     = stylesheet_link_tag :all
     = javascript_include_tag 'jquery', 'highcharts/highcharts.src', 'chart'
     = csrf_meta_tag
@@ -13,6 +13,7 @@
         %ul
           %li= link_to 'Home', root_path
           %li= link_to 'Chart', chart_users_path
+          = yield :nav_links
       %nav#nav_user
         %ul
           - if user_signed_in?
