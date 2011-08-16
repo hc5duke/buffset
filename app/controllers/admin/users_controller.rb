@@ -4,8 +4,8 @@ class Admin::UsersController < ApplicationController
   layout 'admin'
 
   def index
-    @active_users = User.all(:conditions => 'active = 1')
-    @inactive_users = User.all(:conditions => 'active = 0 or active is null')
+    @active_users = User.all(:conditions => ['active = ?', true])
+    @inactive_users = User.all(:conditions => ['active != ?', true])
   end
 
   def update
