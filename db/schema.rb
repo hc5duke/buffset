@@ -10,13 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110719144306) do
+ActiveRecord::Schema.define(:version => 20110816172104) do
 
   create_table "pushup_histories", :force => true do |t|
     t.integer  "user_id"
     t.integer  "count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "season"
   end
 
   create_table "services", :force => true do |t|
@@ -36,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20110719144306) do
     t.datetime "updated_at"
     t.integer  "pushup_set_count", :default => 0
     t.string   "handle"
-    t.boolean  "active"
     t.boolean  "admin"
+    t.boolean  "active",           :default => false
   end
 
 end
