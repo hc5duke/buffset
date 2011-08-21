@@ -2,8 +2,7 @@
 %html
   %head
     %title Buffset
-    - if Rails.env == 'production'
-      %link{:href => 'https://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
+    %link{:href => 'https://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
     = stylesheet_link_tag "bootstrap-1.0.0.min", "application"
     = javascript_include_tag 'jquery', 'highcharts/highcharts.src', 'chart'
     = csrf_meta_tag
@@ -44,7 +43,10 @@
           .alert-message{:class => key}
             = link_to "&times;".html_safe, '#', :class => "close"
             = value
-    .container#body= yield
+    .container#body
+      #season-number-outside
+        #season-number 2
+      = yield
     %script
       = yield :page_javascript
       :plain

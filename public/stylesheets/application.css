@@ -37,10 +37,21 @@ input {
   background-repeat: no-repeat;
   text-align: center;
 }
-.text {
-  padding: 170px 100px 0px;
+#season-number-outside {
+  position: relative;
+}
+#season-number {
+  position: absolute;
+  right: 150px;
+  top: 85px;
+  font-size: 80px;
   font-family: 'Walter Turncoat', cursive, arial;
-  font-size: 2em;
+}
+.text {
+  padding: 170px 60px 0px;
+  font-family: 'Walter Turncoat', cursive, arial;
+  font-size: 40px;
+  line-height: 40px;
 }
 .user {
   padding: 5px 15px 20px;
