@@ -2,7 +2,7 @@ class ChartController < ApplicationController
   before_filter :find_active_users
 
   def index
-    @series = @users.map do |user|
+    @series = @users.reject{|u|u.pushup_set_count.zero?}.map do |user|
       data = user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * pushup.multiplier]}
       { :name => user.handle, :data => data, :multiplier => user.multiplier }
     end
