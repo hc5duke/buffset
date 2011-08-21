@@ -4,31 +4,17 @@ class ChartController < ApplicationController
   def index
     @series = @users.map do |user|
       data = user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
-      {
-        :name => user.handle,
-        :data => data
-      }
+      { :name => user.handle, :data => data }
     end
   end
 
   def sum
-    #TODO memcached?
-    times = {}
-    @users.each do |user|
-      previous_count = 0
-      user.pushup_histories.sort_by(&:created_at).each do |record|
-        times[record.created_at] ||= 0
-        dates[date] += (record.count - previous_count)
-        previous_count = record.count
-      end
+    count = 0
+    data = PushupHistory.find(:all, :order => 'created_at').map do |record|
+      count += record.diff
+      [record.created_at, count]
     end
-    @series =
-      [
-        {
-          :name => "Sum",
-          :data => dates.to_a
-        }
-      ]
+    @series = [ { :name => "Tapjoy, Inc.", :data => data } ]
     render :index
   end
 

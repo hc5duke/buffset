@@ -12,7 +12,9 @@
       %nav#nav_pages
         %ul
           %li= link_to 'Home', root_path
-          %li= link_to 'Chart', chart_path
+          %li= link_to 'Data', users_path
+          %li= link_to 'Chart (competitive)', chart_path
+          %li= link_to 'Chart (cumulative)', chart_sum_path
           = yield :nav_links
       %nav#nav_user
         %ul
