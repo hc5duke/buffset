@@ -20,4 +20,25 @@ class Util
     new_johnny.update_attribute :active, true
     old_johnny.update_attribute :active, false
   end
+
+  def self.fake_data
+    if Rails.env == 'development'
+      PushupHistory.destroy_all
+      User.all.each do |user|
+        dates = []
+        counts = []
+        data_size = (rand * 5 + 2)
+        date = Date.today
+        count = 0
+        data_size.to_i.times do
+          dates << (date -= (rand * 45 + 3).to_i.hours)
+          counts << (count += rand * 2 + 1).to_i * 20
+        end
+
+        dates.reverse.zip(counts).each do |date, count|
+          PushupHistory.create(:user => user, :created_at => date, :count => count, :season => 2)
+        end
+      end
+    end
+  end
 end

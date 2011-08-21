@@ -4,6 +4,8 @@ Buffset::Application.routes.draw do
 
   match '/auth/:service/callback' => 'services#create'
   match '/auth/failure' => 'services#failure'
+  match '/chart' => 'chart#index'
+  match '/chart/sum' => 'chart#sum'
 
   resources :services, :only => [:index, :create, :destroy] do
     collection do
@@ -15,11 +17,7 @@ Buffset::Application.routes.draw do
     end
   end
 
-  resources :users, :only => [:index, :show, :edit, :update] do
-    collection do
-      get 'chart'
-    end
-  end
+  resources :users, :only => [:index, :show, :edit, :update]
 
   namespace :admin do
     resources :users, :only => [:index, :update]

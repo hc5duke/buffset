@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :chart]
-  before_filter :find_active, :only => [:index, :chart]
+  before_filter :find_active_users, :only => [:index, :chart]
   before_filter :find_user, :only => [:show, :edit, :update]
 
   def index
@@ -53,9 +53,6 @@ class UsersController < ApplicationController
   end
 
 private
-  def find_active
-    @users = User.active.sort_by{|user| -user.pushup_set_count }
-  end
 
   def find_user
     if current_user.admin?
