@@ -3,8 +3,8 @@ class ChartController < ApplicationController
 
   def index
     @series = @users.map do |user|
-      data = user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
-      { :name => user.handle, :data => data }
+      data = user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * pushup.multiplier]}
+      { :name => user.handle, :data => data, :multiplier => user.multiplier }
     end
   end
 
@@ -12,7 +12,7 @@ class ChartController < ApplicationController
     count = 0
     data = PushupHistory.find(:all, :order => 'created_at').map do |record|
       count += record.diff
-      [record.created_at, count * 20]
+      [record.created_at, count * record.multiplier]
     end
     @series = [ { :name => "Tapjoy, Inc.", :data => data } ]
     render :index

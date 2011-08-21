@@ -21,20 +21,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def chart
-    @series = @users.map do |user|
-      {
-        :name => user.handle,
-        :data => user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
-      }
-    end
-  end
-
   def show
     @series = [
       {
         :name => @user.handle,
-        :data => @user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * 20]}
+        :data => @user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * pushup.multiplier]}
       }
     ]
   end
