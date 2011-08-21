@@ -23,12 +23,7 @@
           = yield :nav_links
           - if user_signed_in?
             - if current_user.admin?
-              %li
-                = User.active.count
-                active
-                \/
-                = User.count
-                total
+              %li= link_to "#{User.active.count} active / #{User.count} total", admin_users_path
             %li.menu
               = link_to current_user.email, '#', :class => 'menu'
               %ul.menu-dropdown
