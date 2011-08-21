@@ -21,6 +21,15 @@ class Util
     old_johnny.update_attribute :active, false
   end
 
+  def self.create_diff_data
+    User.all.each do |user|
+      previous_count = 0
+      user.pushup_histories.sort_by(&:created_at).each do |record|
+        record.update_attribute :diff, (record.count - previous_count)
+      end
+    end
+  end
+
   def self.fake_data
     if Rails.env == 'development'
       PushupHistory.destroy_all

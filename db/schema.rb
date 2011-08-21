@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816172104) do
+ActiveRecord::Schema.define(:version => 20110821020330) do
 
   create_table "pushup_histories", :force => true do |t|
     t.integer  "user_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110816172104) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "season"
+    t.integer  "diff"
   end
 
   create_table "services", :force => true do |t|
