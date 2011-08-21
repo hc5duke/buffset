@@ -26,6 +26,7 @@ class Util
       previous_count = 0
       user.pushup_histories.sort_by(&:created_at).each do |record|
         record.update_attribute :diff, (record.count - previous_count)
+        previous_count = record.count
       end
     end
   end

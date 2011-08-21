@@ -5,6 +5,6 @@ class PushupHistory < ActiveRecord::Base
 
 private
   def find_diff
-    self.diff = count - user.pushup_histories.sort_by(&:created_at).last.count
+    self.diff ||= count - user.pushup_histories.sort_by(&:created_at).last.count
   end
 end
