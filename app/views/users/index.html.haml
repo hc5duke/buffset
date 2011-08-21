@@ -26,20 +26,20 @@
       $('#edit_current_user_form').show();
       return false;
     });
-    
+
     $('#cancel_edit').click(function(){
       $('#edit_current_user').show();
       $('#edit_current_user_form').hide();
       return false;
     });
-    
+
     $('#enable_notifications').click(function(){
       checkStatus();
       return false;
     });
 
     var usersHash = #{@users_hash.to_json};
-    
+
     if (window.webkitNotifications) {
       function createNotificationInstance(options) {
         if (options.notificationType == 'simple') {
@@ -48,7 +48,7 @@
           return window.webkitNotifications.createHTMLNotification(options.url);
         }
       }
-      
+
       var checkStatus = function(){
         if (window.webkitNotifications.checkPermission() == 0) { // notifications enabled
           $('#enable_notifications').hide();
@@ -71,7 +71,7 @@
           window.webkitNotifications.requestPermission(checkStatus);
         }
       };
-      
+
       var notify = function(name, count){
         var options = {
           notificationType: 'simple',
@@ -83,16 +83,16 @@
         notification.ondisplay = function() {};
         notification.onclose = function() {};
         notification.show();
-        setTimeout(function() { 
+        setTimeout(function() {
           notification.cancel();
-        },'10000');
+        },'15000');
       };
-      
-      var encouragement = [ 
+
+      var encouragement = [
         'You are weak.',
         'You are a bitch.'
       ];
-      
+
       checkStatus();
     } else {
       $('#enable_notifications').hide();
