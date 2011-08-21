@@ -12,7 +12,7 @@ class ChartController < ApplicationController
     count = 0
     data = PushupHistory.find(:all, :order => 'created_at').map do |record|
       count += record.diff
-      [record.created_at, count]
+      [record.created_at, count * 20]
     end
     @series = [ { :name => "Tapjoy, Inc.", :data => data } ]
     render :index
