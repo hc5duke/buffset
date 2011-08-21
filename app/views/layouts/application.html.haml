@@ -4,20 +4,24 @@
     %title Buffset
     - if Rails.env == 'production'
       %link{:href => 'https://fonts.googleapis.com/css?family=Walter+Turncoat&v2', :rel => 'stylesheet', :type => 'text/css'}
-    = stylesheet_link_tag :all
+    = stylesheet_link_tag "bootstrap-1.0.0.min", "application"
     = javascript_include_tag 'jquery', 'highcharts/highcharts.src', 'chart'
     = csrf_meta_tag
   %body
-    %section#body
-      %nav#nav_pages
-        %ul
-          %li= link_to 'Home', root_path
-          %li= link_to 'Data', users_path
-          %li= link_to 'Chart (competitive)', chart_path
-          %li= link_to 'Chart (cumulative)', chart_sum_path
+    .topbar
+      .container.fixed
+        %h3
+          = link_to "Tapjoy Buffset \\m/", root_path, :class => 'logo'
+        %ul.nav
+          %li= link_to 'Board', users_path
+        %ul.nav
+          %li.menu
+            = link_to 'Chart', '#', :class => 'menu'
+            %ul.menu-dropdown
+              %li= link_to 'Competitive', chart_path
+              %li= link_to 'Cumulative', chart_sum_path
+        %ul.nav.secondary-nav
           = yield :nav_links
-      %nav#nav_user
-        %ul
           - if user_signed_in?
             - if current_user.admin?
               %li
@@ -26,16 +30,31 @@
                 \/
                 = User.count
                 total
-            %li= link_to current_user.email, edit_user_path(current_user)
-            %li= link_to "Sign out", signout_services_path
+            %li.menu
+              = link_to current_user.email, '#', :class => 'menu'
+              %ul.menu-dropdown
+                %li= link_to 'Edit profile', edit_user_path(current_user)
+                %li= link_to 'Sign out', signout_services_path
           - else
             %li= link_to "Sign in", '/auth/google'
-          %li &nbsp;
-      .clear
-      %section#flash
+    .container{:style => 'height: 40px;'}
+    .container
+      %section#alerts
         - flash.each do |key, value|
-          .flash.round{:class => key}
+          .alert-message{:class => key}
+            = link_to "&times;".html_safe, '#', :class => "close"
             = value
-      .container= yield
+    .container#body= yield
     %script
       = yield :page_javascript
+      :plain
+        $('li.menu').click(function(e){
+          if (e.srcElement.className) {
+            $(this).children('ul.menu-dropdown').toggle();
+            return false;
+          }
+        });
+        $('.close').click(function(){
+          $(this).parent().slideUp();
+          return false;
+        });

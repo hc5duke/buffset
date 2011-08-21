@@ -1,17 +1,23 @@
 %section#edit_user.text
   = form_for @user do |f|
-    %h3 Edit user
-    %section#user-email
-    = f.label :email
-    = f.email_field :email, :disabled => 'disabled'
-    - if current_user.admin?
-      %section#user-active
-      = f.label :active
-      = f.check_box :active
-    %section#user-handle
-    = f.label :handle
-    = f.text_field :handle
-    %section#user-pushup-set-count
-    = f.label :pushup_set_count, "Count"
-    = f.number_field :pushup_set_count, :min => 0, :max => 9999
-    = f.submit
+    %fieldset
+      %legend Edit user
+      .clearfix
+        = f.label :email
+        = f.email_field :email, :disabled => 'disabled', :class => 'xlarge'
+      - if current_user.admin?
+        .clearfix
+        = f.label :active
+        = f.check_box :active
+      .clearfix
+        = f.label :handle
+        = f.text_field :handle, :class => 'xlarge'
+      .clearfix
+        = f.label :pushup_set_count, "Count"
+        = f.number_field :pushup_set_count, :min => 0, :max => 9999, :class => 'xlarge'
+      .clearfix
+        .row
+          .span1.columns &nbsp;
+          .span4.columns= button_to('Cancel', :back, :class => 'btn large')
+          .span4.columns= f.submit(:class => 'btn large primary')
+          .span3.columns &nbsp;

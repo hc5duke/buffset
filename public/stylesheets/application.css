@@ -30,23 +30,16 @@ input {
   color: white;
 }
 #body {
-  width: 880px;
-  height: 679px;
+  width: 878px;
+  height: 677px;
   margin: 0px auto;
   background-image: url(/images/buffset.jpg);
   background-repeat: no-repeat;
-}
-.text {
-  padding: 130px 100px 0px;
-  font-family: 'Walter Turncoat', cursive, arial;
-  font-size: 2em;
-}
-#signin {
-  margin-top: 280px;
   text-align: center;
 }
-#signin a {
-  text-decoration: none;
+.text {
+  padding: 170px 100px 0px;
+  font-family: 'Walter Turncoat', cursive, arial;
   font-size: 2em;
 }
 .user {
@@ -67,9 +60,6 @@ input {
 }
 #edit_current_user a {
   text-decoration: none;
-}
-.clear {
-  clear: both;
 }
 .hidden {
   display: none;
