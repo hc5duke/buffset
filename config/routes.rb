@@ -6,6 +6,7 @@ Buffset::Application.routes.draw do
   match '/auth/failure' => 'services#failure'
   match '/chart' => 'chart#index'
   match '/chart/sum' => 'chart#sum'
+  match '/chart/punch' => 'chart#punch'
 
   resources :services, :only => [:index, :create, :destroy] do
     collection do
