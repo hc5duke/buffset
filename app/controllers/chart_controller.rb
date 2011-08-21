@@ -19,10 +19,6 @@ class ChartController < ApplicationController
   end
 
 private
-  def find_active_users
-    @users = User.active.sort_by{|user| -user.pushup_set_count }
-  end
-
   def find_user
     if current_user.admin?
       @user = User.find(params[:id])

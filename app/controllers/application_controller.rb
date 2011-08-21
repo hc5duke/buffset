@@ -34,6 +34,6 @@ private
   end
 
   def find_active_users
-    @users = User.active.sort_by{|user| -user.pushup_set_count }
+    @users = User.active
   end
 end

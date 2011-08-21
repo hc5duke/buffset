@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validate :pushup_set_count, :numericality => true, :greater_than_or_equal_to => 0, :less_than => 10000
   validate :handle, :length => { :minimum => 1, :maximum => 10}
 
-  scope :active, :conditions => [ 'active = ?', true ], :order => [ 'handle' ]
+  scope :active, :conditions => [ 'active = ?', true ], :order => "pushup_count DESC, handle, id"
 
 private
   def log_pushups
