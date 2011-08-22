@@ -1,12 +1,14 @@
 class Fixnum
   # starting with 10, use Roman
-  def tallyize(use_v_for_5=false)
+  def tallyize(use_v_for_5=false, is_json=false)
     if self > 0
       ones = self % 10
       str = [ (self - ones).romanize, ' ' ]
       if ones >= 5
         if use_v_for_5
           str << 'V'
+        elsif is_json
+          str << "_V_"
         else
           str << "\314\266/" * 4
         end

@@ -59,11 +59,13 @@
             for (var u in response) {
               if (response[u].count != usersHash[u].count) {
                 usersHash[u] = response[u];
-                $('#user_' + u).find('.count').text(response[u].tally);
+                var five = String.fromCharCode(47, 822, 47, 822, 47, 822, 47, 822);
+                var tally = response[u].tally.replace(/_V_/g, five);
+                $('#user_' + u).find('.count').text(tally);
                 notify(response[u].name, response[u].count);
               }
             }
-            setTimeout(checkStatus, 5000);
+            setTimeout(checkStatus, 15000);
           });
         } else if (window.webkitNotifications.checkPermission() == 2) { // notifications disabled
           $('#enable_notifications').hide();

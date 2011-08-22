@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include ApplicationHelper
   before_filter :authenticate_user!, :except => [:index, :chart]
   before_filter :find_active_users, :only => [:index, :chart]
   before_filter :find_user, :only => [:show, :edit, :update]
@@ -10,7 +11,7 @@ class UsersController < ApplicationController
         @users_hash[user.id] = {
           :name  => user.name,
           :count => user.pushup_set_count,
-          :tally => user.pushup_set_count.to_i.tallyize
+          :tally => user.pushup_set_count.to_i.tallyize(is_mobile?, params[:format] == 'json')
         }
       end
     end
