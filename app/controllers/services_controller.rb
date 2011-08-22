@@ -32,10 +32,10 @@ class ServicesController < ApplicationController
       session.delete :authhash
       redirect_to root_url
     else  # create account
-      @newuser = User.new
-      @newuser.name = session[:authhash][:name]
-      @newuser.email = session[:authhash][:email]
-      @newuser.handle = @newuser.email.split('@').first[0,10]
+      @newuser = User.find_by_email(session[:authhash][:email]) || User.new
+      @newuser.name ||= session[:authhash][:name]
+      @newuser.email ||= session[:authhash][:email]
+      @newuser.handle ||= @newuser.email.split('@').first[0,10]
       @newuser.services.build(:provider => session[:authhash][:provider], :uid => session[:authhash][:uid], :uname => session[:authhash][:name], :uemail => session[:authhash][:email])
 
       if @newuser.save!
