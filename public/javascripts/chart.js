@@ -24,9 +24,9 @@ var createChart = function(series) {
       type: 'datetime',
       maxZoom: 24 * 3600000, // 1 day
       dateTimeLabelFormats: {
-        day: '%m-%d',
-        week: '%m-%d',
-        month: '%y-%m',
+        day: '%m/%d',
+        week: '%m/%d',
+        month: '%y/%m',
         year: '%Y'
       }
     },
@@ -55,7 +55,7 @@ var createChart = function(series) {
     tooltip: {
       formatter: function() {
         return '<b>'+ this.series.name +'</b><br/>'+
-          Highcharts.dateFormat('%m-%d %H:%M', this.x) +': '+ this.y +' pushups (' + this.y/20 +' sets of 20)';
+          Highcharts.dateFormat('%m/%d %H:%M', this.x) +': '+ this.y +' pushups (' + this.y/20 +' sets of 20)';
       }
     },
     legend: {
@@ -75,6 +75,7 @@ var createStackedChart = function(categories, series) {
     chart: {
       renderTo: 'container',
       defaultSeriesType: 'area',
+      zoomType: 'x',
     },
     title: {
       text: 'Buffness Progress Indicator',
@@ -113,8 +114,9 @@ var createStackedChart = function(categories, series) {
     },
     tooltip: {
       formatter: function() {
-        return '<b>'+ this.series.name +'</b><br/>'+
-          Highcharts.dateFormat('%m-%d %H:%M', this.x) +': '+ this.y +' pushups (' + this.y/20 +' sets of 20)';
+        return '<b>' + this.series.name +'</b><br/>'+
+          this.x +': '+ this.y +' pushups (' + this.y/20 +' sets of 20)<br/>' +
+          '<b>Total</b><br/>' + this.total + ' pushups (' + this.percentage.toFixed(2) + '%)';
       }
     },
     legend: {

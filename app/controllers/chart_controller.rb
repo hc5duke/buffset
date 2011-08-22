@@ -1,22 +1,25 @@
 class ChartController < ApplicationController
   before_filter :find_active_users
+  before_filter :reject_losers
 
   def index
-    @series = @users.reject{|u|u.pushup_set_count.zero?}.map do |user|
+    @series = @users.map do |user|
       data = user.pushup_histories.map{|pushup| [pushup.created_at, pushup.count.to_i * pushup.multiplier]}
       { :name => user.handle, :data => data, :multiplier => user.multiplier }
     end
   end
 
   def sum
-    handles = User.active.map(&:handle)
+    handles = @users.map(&:handle)
     start_date = PushupHistory.first(:order => 'created_at').created_at.to_date
     end_date = PushupHistory.first(:order => 'created_at DESC').created_at.to_date
     dates = Hash[(start_date..end_date).map{|d|[d, nil]}]
     data = Hash[handles.zip(handles.length.times.map{|x| dates.clone })]
     PushupHistory.find(:all, :include => [:user], :order => 'created_at').map do |record|
       date = record.created_at.to_date
-      data[record.user.handle][date] = record.count
+      if data[record.user.handle]
+        data[record.user.handle][date] = record.count * record.multiplier
+      end
     end
     Rails.logger.warn data.first.inspect
     @categories = data.first[1].keys.map{|d|d.strftime('%m/%d')}
@@ -56,5 +59,9 @@ private
     else
       @user = current_user
     end
+  end
+
+  def reject_losers
+    @users.reject!{|u|u.pushup_set_count.zero?}
   end
 end
