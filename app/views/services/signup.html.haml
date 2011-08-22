@@ -1,5 +1,6 @@
+- account_exists = User.find_by_email(@authhash[:email]).present?
 %section#services_new.services.text
-  %h1 Create new account
+  %h1= account_exists ? 'Account exists' : 'Create new account'
   %p.small
     Provider:
     = @authhash[:provider]
@@ -15,5 +16,6 @@
     %br/
 
   = form_tag :controller => "services", :action => "newaccount" do
-    = submit_tag "Confirm and create new account"
+    - submit_text = account_exists ? 'Confirm and log in to this account' : 'Confirm and create new account'
+    = submit_tag submit_text
     = submit_tag "Cancel"
