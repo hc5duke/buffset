@@ -42,12 +42,14 @@ class Util
         count = 0
         data_size.to_i.times do
           dates << (date -= (rand * 45 + 3).to_i.hours)
-          counts << (count += rand * 2 + 1).to_i * 20
+          counts << (count += rand * 2 + 1).to_i
         end
 
         dates.reverse.zip(counts).each do |date, count|
           PushupHistory.create(:user => user, :created_at => date, :count => count, :season => 2)
         end
+        user.update_attribute :pushup_set_count, counts.max
+
       end
     end
   end
