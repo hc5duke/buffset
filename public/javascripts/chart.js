@@ -55,7 +55,7 @@ var createChart = function(series) {
     tooltip: {
       formatter: function() {
         return '<b>'+ this.series.name +'</b><br/>'+
-          Highcharts.dateFormat('%m/%d %H:%M', this.x) +': '+ this.y +' pushups (' + this.y/20 +' sets of 20)';
+          Highcharts.dateFormat('%m/%d %H:%M', this.x) +': '+ this.y +' pushups (' + this.y/20 +' sets * 20)';
       }
     },
     legend: {
@@ -115,7 +115,7 @@ var createStackedChart = function(categories, series) {
     tooltip: {
       formatter: function() {
         return '<b>' + this.series.name +'</b><br/>'+
-          this.x +': '+ this.y +' pushups (' + this.y/20 +' sets of 20)<br/>' +
+          this.x +': '+ this.y +' pushups (' + this.y/20 +' sets * 20)<br/>' +
           '<b>Total</b><br/>' + this.total + ' pushups (' + this.percentage.toFixed(2) + '%)';
       }
     },
