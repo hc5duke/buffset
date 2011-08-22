@@ -69,3 +69,62 @@ var createChart = function(series) {
     series: series
   });
 };
+
+var createStackedChart = function(categories, series) {
+  var chart = new Highcharts.Chart({
+    chart: {
+      renderTo: 'container',
+      defaultSeriesType: 'area',
+    },
+    title: {
+      text: 'Buffness Progress Indicator',
+    },
+    subtitle: {
+      text: 'Source: Buff people',
+    },
+    xAxis: {
+      categories: categories,
+      tickmarkPlacement: 'on',
+      title: {
+        enabled: false
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Total Pushups'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      },
+      min: 0
+    },
+    plotOptions: {
+      area: {
+        stacking: 'normal',
+        lineColor: '#666666',
+        lineWidth: 1,
+        marker: {
+          lineWidth: 1,
+          lineColor: '#666666'
+        }
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>'+ this.series.name +'</b><br/>'+
+          Highcharts.dateFormat('%m-%d %H:%M', this.x) +': '+ this.y +' pushups (' + this.y/20 +' sets of 20)';
+      }
+    },
+    legend: {
+      layout: 'vertical',
+      align: 'right',
+      verticalAlign: 'top',
+      x: -10,
+      y: 100,
+      borderWidth: 0
+    },
+    series: series
+  });
+};

@@ -9,13 +9,25 @@ class ChartController < ApplicationController
   end
 
   def sum
-    count = 0
-    data = PushupHistory.find(:all, :order => 'created_at').map do |record|
-      count += record.diff * record.multiplier
-      [record.created_at, count]
+    handles = User.active.map(&:handle)
+    start_date = PushupHistory.first(:order => 'created_at').created_at.to_date
+    end_date = PushupHistory.first(:order => 'created_at DESC').created_at.to_date
+    dates = Hash[(start_date..end_date).map{|d|[d, nil]}]
+    data = Hash[handles.zip(handles.length.times.map{|x| dates.clone })]
+    PushupHistory.find(:all, :include => [:user], :order => 'created_at').map do |record|
+      date = record.created_at.to_date
+      data[record.user.handle][date] = record.count
     end
-    @series = [ { :name => "Tapjoy, Inc.", :data => data } ]
-    render :index
+    Rails.logger.warn data.first.inspect
+    @categories = data.first[1].keys.map{|d|d.strftime('%m/%d')}
+    @series = data.map do |k,v|
+      Rails.logger.warn v.inspect
+      values = v.values
+      values.each_with_index do |value, index|
+        values[index] = index.zero? ? 0 : values[index] = values[index - 1] if value.nil?
+      end
+      { :name => k, :data => values }
+    end
   end
 
   def punch

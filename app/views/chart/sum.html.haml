@@ -1,0 +1,9 @@
+.text{:style => 'padding: 100px 0px 0px;'}
+  #container{:style => "width: 100%; height: 480px; margin: 0 auto;"}
+%script
+  :plain
+    var series = #{@series.to_json};
+    var categories = #{@categories.to_json};
+    $(function(){
+      createStackedChart(categories, series);
+    });
