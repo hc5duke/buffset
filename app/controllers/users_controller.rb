@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   include ApplicationHelper
-  before_filter :authenticate_user!, :except => [:index, :chart]
+  before_filter :authenticate_user!, :except => [:index, :chart, :show]
   before_filter :find_active_users, :only => [:index, :chart]
-  before_filter :find_user, :only => [:show, :edit, :update]
+  before_filter :find_user, :only => [:edit, :update]
 
   def index
     @users_hash = {}
@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     @series = [
       {
         :name => @user.handle,
