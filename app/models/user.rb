@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 private
   def log_pushups
     if pushup_set_count_changed?
-      pushup_histories.build(:count => pushup_set_count)
+      pushup_histories.build(:count => pushup_set_count, :multiplier => multiplier)
     end
   end
 end
